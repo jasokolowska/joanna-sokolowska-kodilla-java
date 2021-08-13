@@ -42,11 +42,12 @@ public class CollectionTestSuite {
         normalList.add(4);
         normalList.add(5);
 
-        //when
-        List<Integer> resultList = OddNumbersExterminator.exterminate(normalList);
         List<Integer> expectedList = new LinkedList<>();
         expectedList.add(2);
         expectedList.add(4);
+
+        //when
+        List<Integer> resultList = OddNumbersExterminator.exterminate(normalList);
 
         //then
         Assertions.assertEquals(expectedList, resultList);
