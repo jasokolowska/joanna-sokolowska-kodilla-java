@@ -8,6 +8,15 @@ import java.util.List;
 
 public class CollectionTestSuite {
 
+    @BeforeEach
+    public void before(){
+        System.out.println("Start testu");
+    }
+
+    @AfterEach
+    public void after(){
+        System.out.println("Koniec testu");
+    }
 
     @DisplayName("When providing empty list then empty list should be returned")
     @Test
