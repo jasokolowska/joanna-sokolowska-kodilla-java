@@ -2,6 +2,8 @@ package com.kodilla.testing.shape;
 
 import org.junit.jupiter.api.*;
 
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ShapeCollectorTestSuite {
@@ -31,12 +33,12 @@ public class ShapeCollectorTestSuite {
             //Given
             ShapeCollector shapeCollector = new ShapeCollector();
             Triangle triangle = new Triangle("triangle", 15.1);
-            int shapesQuantity = shapeCollector.getShapes().size();
 
             //When
             shapeCollector.addFigure(triangle);
 
             //Then
+            int shapesQuantity = shapeCollector.getShapes().size();
             assertEquals(1, shapesQuantity);
         }
 
@@ -77,12 +79,12 @@ public class ShapeCollectorTestSuite {
             //Given
             ShapeCollector shapeCollector = new ShapeCollector();
             Square square = new Square("square", 15.1);
-            int shapesQuantity = shapeCollector.getShapes().size();
 
             //When
             shapeCollector.addFigure(square);
 
             //Then
+            int shapesQuantity = shapeCollector.getShapes().size();
             assertEquals(1, shapesQuantity);
         }
 
@@ -123,12 +125,12 @@ public class ShapeCollectorTestSuite {
             //Given
             ShapeCollector shapeCollector = new ShapeCollector();
             Circle circle = new Circle("circle", 15.1);
-            int shapesQuantity = shapeCollector.getShapes().size();
 
             //When
             shapeCollector.addFigure(circle);
 
             //Then
+            int shapesQuantity = shapeCollector.getShapes().size();
             assertEquals(1, shapesQuantity);
         }
 
@@ -168,6 +170,7 @@ public class ShapeCollectorTestSuite {
         //Given
         ShapeCollector shapeCollector = new ShapeCollector();
         Triangle triangle = new Triangle("triangle", 15.1);
+        shapeCollector.shapes.add(triangle);
 
         //When
         Shape result = shapeCollector.getFigure(0);
@@ -183,7 +186,8 @@ public class ShapeCollectorTestSuite {
         Triangle triangle = new Triangle("triangle", 15.1);
         Square square = new Square("square", 6.0);
         Circle circle = new Circle("circle", 10);
-        String expectedResult = "triangle, square, circle";
+        Collections.addAll(shapeCollector.shapes, triangle, square, circle);
+        String expectedResult = "triangle, square, circle, ";
 
         //When
         String result = shapeCollector.showFigures();
