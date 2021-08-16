@@ -34,13 +34,14 @@ public class ForumStatisticsTestSuite {
     void testCalculateStatisticsAvgZeroPosts () {
         //Given
         CalculateStatistics calculateStatistics = new CalculateStatistics(statisticsMock);
+        when(statisticsMock.commentsCount()).thenReturn(250);
 
         //When
         calculateStatistics.calculateAvgStatistics(statisticsMock);
 
         //Then
         Assertions.assertEquals(0, calculateStatistics.getAveragePostsPerUser()); //average posts per user
-        Assertions.assertEquals(0, calculateStatistics.getAverageCommentsPerUser()); //average comments per user
+        Assertions.assertEquals(50, calculateStatistics.getAverageCommentsPerUser()); //average comments per user
         Assertions.assertEquals(0, calculateStatistics.getAverageCommentsPerPost()); //average comments per post
     }
 
@@ -114,6 +115,8 @@ public class ForumStatisticsTestSuite {
         CalculateStatistics calculateStatistics = new CalculateStatistics(statisticsMock);
         List<String> usersList = new ArrayList<>();
         when(statisticsMock.usersNames()).thenReturn(usersList);
+        when(statisticsMock.postsCount()).thenReturn(100);
+        when(statisticsMock.commentsCount()).thenReturn(250);
 
         //When
         calculateStatistics.calculateAvgStatistics(statisticsMock);
@@ -121,7 +124,7 @@ public class ForumStatisticsTestSuite {
         //Then
         Assertions.assertEquals(0, calculateStatistics.getAveragePostsPerUser()); //average posts per user
         Assertions.assertEquals(0, calculateStatistics.getAverageCommentsPerUser()); //average comments per user
-        Assertions.assertEquals(0, calculateStatistics.getAverageCommentsPerPost()); //average comments per post
+        Assertions.assertEquals(2.5, calculateStatistics.getAverageCommentsPerPost()); //average comments per post
     }
 
     @Test
