@@ -42,13 +42,6 @@ public class ForumUser {
         this.postQuantity = postQuantity;
     }
 
-    public boolean compareGender(char gender) {
-        if (Character.compare(this.gender, gender) == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public int getAge() {
         return LocalDate.now().getYear() - this.dateOfBirth.getYear();
