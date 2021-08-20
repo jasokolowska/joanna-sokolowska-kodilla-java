@@ -1,8 +1,13 @@
 package com.kodilla.stream.portfolio;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -139,5 +144,34 @@ class BoardTestSuite {
 
         //Then
         assertEquals(2, longTasks);                                       // [9]
+    }
+
+    @Test
+    void testAddTaskListAverageWorkingOnTask() {
+        //Given
+        Board project = prepareTestData();
+
+        //When
+        List<TaskList> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add(new TaskList("In progress"));
+        List<Long> durationOfTaskInDays = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(taskList -> taskList.getTasks().stream())
+                .map(Task::getCreated)
+                .map(creationDate -> getDiffFromTodayInDays(creationDate))
+                .toList();
+
+        //double averageDurationOfTaskInDays
+        double averageDurationOfTaskInDays = LongStream.range(0, durationOfTaskInDays.size())
+                .map(index -> durationOfTaskInDays.get((int)index))
+                .average().getAsDouble();
+
+        //Then
+        Assertions.assertEquals(-10,averageDurationOfTaskInDays);
+
+    }
+
+    private long getDiffFromTodayInDays(LocalDate date) {
+        return Duration.between(LocalDate.now().atStartOfDay(), date.atStartOfDay()).toDays();
     }
 }
