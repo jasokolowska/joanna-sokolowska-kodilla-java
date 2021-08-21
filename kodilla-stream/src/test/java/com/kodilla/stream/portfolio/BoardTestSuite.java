@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -154,24 +155,15 @@ class BoardTestSuite {
         //When
         List<TaskList> inProgressTasks = new ArrayList<>();
         inProgressTasks.add(new TaskList("In progress"));
-        List<Long> durationOfTaskInDays = project.getTaskLists().stream()
+        double durationOfTaskInDays = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(taskList -> taskList.getTasks().stream())
                 .map(Task::getCreated)
-                .map(creationDate -> getDiffFromTodayInDays(creationDate))
-                .toList();
-
-        //double averageDurationOfTaskInDays
-        double averageDurationOfTaskInDays = LongStream.range(0, durationOfTaskInDays.size())
-                .map(index -> durationOfTaskInDays.get((int)index))
+                .mapToLong(creationDate -> ChronoUnit.DAYS.between(LocalDate.now(), creationDate))
                 .average().getAsDouble();
 
         //Then
-        Assertions.assertEquals(-10,averageDurationOfTaskInDays);
+        Assertions.assertEquals(-10,durationOfTaskInDays);
 
-    }
-
-    private long getDiffFromTodayInDays(LocalDate date) {
-        return Duration.between(LocalDate.now().atStartOfDay(), date.atStartOfDay()).toDays();
     }
 }
