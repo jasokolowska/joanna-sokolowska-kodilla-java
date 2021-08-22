@@ -159,11 +159,11 @@ class BoardTestSuite {
                 .filter(inProgressTasks::contains)
                 .flatMap(taskList -> taskList.getTasks().stream())
                 .map(Task::getCreated)
-                .mapToLong(creationDate -> ChronoUnit.DAYS.between(LocalDate.now(), creationDate))
+                .mapToLong(creationDate -> ChronoUnit.DAYS.between(creationDate, LocalDate.now()))
                 .average().getAsDouble();
 
         //Then
-        Assertions.assertEquals(-10,durationOfTaskInDays);
+        Assertions.assertEquals(10,durationOfTaskInDays);
 
     }
 }
