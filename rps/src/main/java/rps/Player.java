@@ -1,4 +1,4 @@
-package com.kodilla.rps;
+package rps;
 
 interface Player {
     public String getName();

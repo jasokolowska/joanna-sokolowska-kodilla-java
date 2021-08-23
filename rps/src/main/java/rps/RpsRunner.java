@@ -1,4 +1,4 @@
-package com.kodilla.rps;
+package rps;
 
 import java.util.Scanner;
 
@@ -70,7 +70,6 @@ public class RpsRunner {
 
     private static boolean isRoundLeft(Game game) {
         if (game.getCurrentRounds() == game.getNumberOfRounds()) {
-            System.out.println(game);
             game.returnResult();
             isGameEnded();
         }

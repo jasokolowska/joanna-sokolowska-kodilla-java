@@ -1,4 +1,4 @@
-package com.kodilla.rps;
+package rps;
 
 public class Game {
     private int playerScore;
@@ -13,6 +13,11 @@ public class Game {
     }
 
     public void returnResult() {
+        System.out.println("*****************************");
+        System.out.println("Liczba zdobytych punktów: " +
+                "\n Gracz =" + playerScore +
+                "\n Komputer =" + computerScore);
+        System.out.println("*****************************");
         if (playerScore > computerScore){
             System.out.println("Wygrywa Gracz");
         } else if (playerScore < computerScore) {
@@ -62,10 +67,4 @@ public class Game {
         this.computerScore = computerScore;
     }
 
-    @Override
-    public String toString() {
-        return "Liczba zdobytych punktów: " +
-                "Gracz =" + playerScore +
-                "\n Komputer =" + computerScore;
-    }
 }

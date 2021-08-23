@@ -1,4 +1,4 @@
-package com.kodilla.rps;
+package rps;
 
 public class Move {
     private int id;

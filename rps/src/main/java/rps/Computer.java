@@ -1,19 +1,15 @@
-package com.kodilla.rps;
+package rps;
 
-public class Human implements Player {
-    private String name;
+public class Computer implements Player{
+    private final String name;
     private int roundsWon;
 
-    public Human(String name) {
-        this.name = name;
+    public Computer() {
+        this.name = "Komputer";
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getRoundsWon() {

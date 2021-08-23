@@ -1,4 +1,4 @@
-package com.kodilla.rps;
+package rps;
 
 import java.util.Random;
 
