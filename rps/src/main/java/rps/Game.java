@@ -1,5 +1,6 @@
 package rps;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Game {
@@ -46,36 +47,42 @@ public class Game {
         }
     }
 
-    public void restartGame() {
+    public boolean restartGame() {
         System.out.println("Czy chcesz rozpocząć nową grę? Wpisz T(tak)/N(nie)");
         String newGameChoice= SC.nextLine();
-        if (newGameChoice.equals("T")) {
+        if (newGameChoice.toUpperCase().equals("T")) {
             setNumberOfRounds(startNewGame());
             setCurrentRounds(0);
-            //printMenu();
+            return false;
         } else {
             System.out.println("Do zobaczenia!");
+            return true;
         }
 
     }
 
-    public boolean isRoundLeft() {
+    private boolean isRoundLeft() {
         if (getCurrentRounds() == getNumberOfRounds()) {
-            returnResult();
-            return isGameEnded();
+            return false;
         }
-        return false;
+        return true;
     }
 
     public boolean isGameEnded() {
-        System.out.println("Czy chcesz zakończyć grę? Wpisz T(tak)/N(nie)");
-        String endChoice= SC.nextLine();
-        if (endChoice.equals("T")) {
+        if (isRoundLeft()) {
+            return false;
+        } else {
+            returnResult();
+            return restartGame();
+        }
+    }
+
+    public boolean isGameEnded(String endChoice) {
+        if (endChoice.toUpperCase().equals("T")) {
             System.out.println("Do zobaczenia!");
             return true;
         } else {
-            restartGame();
-            return false;
+            return restartGame();
         }
     }
 

@@ -22,27 +22,28 @@ public class RpsRunner {
                 case "1":
                     Move stone = new Move(1);
                     Round.playRound(stone, game, player, computer);
-                    end = game.isRoundLeft();
+                    end = game.isGameEnded();
                     break;
                 case "2":
                     Move paper = new Move(2);
                     Round.playRound(paper, game, player, computer);
-                    end = game.isRoundLeft();
+                    end = game.isGameEnded();
                     break;
                 case "3":
                     Move scissors = new Move(3);
                     Round.playRound(scissors, game, player, computer);
-                    end = game.isRoundLeft();
-                    break;
-                case "x":
                     end = game.isGameEnded();
                     break;
+                case "x":
+                    System.out.println("Czy chcesz zakończyć grę? Wpisz T(tak)/N(nie)");
+                    String endChoice= SC.nextLine();
+                    end = game.isGameEnded(endChoice);
+                    break;
                 case "n":
-                    game.restartGame();
+                    end = game.restartGame();
                     break;
                 default:
                     System.out.println("Wprowadzono niepoprawny znak, proszę wybrać opcję z listy.");
-                    printMenu();
                     break;
             }
         }
