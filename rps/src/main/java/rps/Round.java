@@ -6,32 +6,28 @@ public class Round {
 
     private static Random random = new Random();
 
-    public static void playRound(Move playerMove, Game game, Player player, Computer computer) {
+    public Player playRound(Move playerMove, Player human, Player computer) {
         Move computerMove = randomMove();
         printRoundResult(playerMove.getName(), computerMove.getName());
 
         if (playerMove.getId() == computerMove.getId()) {
             System.out.println("Remis");
         } else if(playerMove.getId() == 1 && computerMove.getId() == 2) {
-            roundWinner(game, computer);
+            return computer;
         } else if(playerMove.getId() == 1 && computerMove.getId() == 3) {
-            roundWinner(game, player);
+            return human;
         } else if(playerMove.getId() == 2 && computerMove.getId() == 1) {
-            roundWinner(game, player);
+            return human;
         } else if(playerMove.getId() == 2 && computerMove.getId() == 3) {
-            roundWinner(game, computer);
+            return computer;
         } else if(playerMove.getId() == 3 && computerMove.getId() == 1) {
-            roundWinner(game, computer);
+            return computer;
         } else if(playerMove.getId() == 3 && computerMove.getId() == 2) {
-            roundWinner(game, player);
+            return human;
         }
-        game.setCurrentRounds(game.getCurrentRounds()+1);
+        return null;
     }
 
-    private static void roundWinner(Game game, Player winner) {
-        System.out.println("Rundę wygrywa " + winner.getName());
-        game.setScore(winner);
-    }
 
     private static void printRoundResult(String playerMove, String computerMove) {
         System.out.println("Ruch gracza: " + "'" + playerMove + "'" +

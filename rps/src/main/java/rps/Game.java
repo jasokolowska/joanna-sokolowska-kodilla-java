@@ -10,19 +10,33 @@ public class Game {
     private int computerScore;
     private int numberOfRounds;
     private int currentRounds;
+    private Computer computer;
+    private Human player;
 
     public Game() {
+        this.computer = new Computer();
+        this.player = new Human();
         this.numberOfRounds = startNewGame();
         this.playerScore = 0;
         this.computerScore = 0;
+
     }
 
-    private static int startNewGame() {
+    private int startNewGame() {
         System.out.println("Podaj liczbę rund: ");
         int numberOfRounds = SC.nextInt();
         SC.nextLine();
         return numberOfRounds;
     }
+
+    public void playRound(Move playerMove) {
+        Round round = new Round();
+        Player winner = round.playRound(playerMove, player, computer);
+        System.out.println("Rundę wygrywa " + winner.getName());
+        setScore(winner);
+        this.setCurrentRounds(this.getCurrentRounds()+1);
+    }
+
     public void returnResult() {
         System.out.println("*****************************");
         System.out.println("Liczba zdobytych punktów: " +
@@ -84,6 +98,22 @@ public class Game {
         } else {
             return restartGame();
         }
+    }
+
+    public Computer getComputer() {
+        return computer;
+    }
+
+    public void setComputer(Computer computer) {
+        this.computer = computer;
+    }
+
+    public Human getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Human player) {
+        this.player = player;
     }
 
     public int getNumberOfRounds() {

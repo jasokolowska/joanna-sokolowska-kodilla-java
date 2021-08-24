@@ -10,8 +10,6 @@ public class RpsRunner {
 
         boolean end = false;
 
-        Computer computer = new Computer();
-        Human player = new Human();
         Game game = new Game();
 
         while (!end) {
@@ -21,17 +19,17 @@ public class RpsRunner {
             switch(choice) {
                 case "1":
                     Move stone = new Move(1);
-                    Round.playRound(stone, game, player, computer);
+                    game.playRound(stone);
                     end = game.isGameEnded();
                     break;
                 case "2":
                     Move paper = new Move(2);
-                    Round.playRound(paper, game, player, computer);
+                    game.playRound(paper);
                     end = game.isGameEnded();
                     break;
                 case "3":
                     Move scissors = new Move(3);
-                    Round.playRound(scissors, game, player, computer);
+                    game.playRound(scissors);
                     end = game.isGameEnded();
                     break;
                 case "x":
