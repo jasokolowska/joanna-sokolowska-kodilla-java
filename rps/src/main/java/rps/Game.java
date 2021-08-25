@@ -34,7 +34,7 @@ public class Game {
         Player winner = round.playRound(playerMove, player, computer);
         System.out.println("Rundę wygrywa " + winner.getName());
         setScore(winner);
-        this.setCurrentRounds(this.getCurrentRounds()+1);
+        this.setCurrentRounds(this.getCurrentRounds() + 1);
     }
 
     public void returnResult() {
@@ -43,7 +43,7 @@ public class Game {
                 "\n Gracz =" + playerScore +
                 "\n Komputer =" + computerScore);
 
-        if (playerScore > computerScore){
+        if (playerScore > computerScore) {
             System.out.println("Wygrywa Gracz");
         } else if (playerScore < computerScore) {
             System.out.println("Wygrywa Komputer");
@@ -63,7 +63,7 @@ public class Game {
 
     public boolean restartGame() {
         System.out.println("Czy chcesz rozpocząć nową grę? Wpisz T(tak)/N(nie)");
-        String newGameChoice= SC.nextLine();
+        String newGameChoice = SC.nextLine();
         if (newGameChoice.toUpperCase().equals("T")) {
             setNumberOfRounds(startNewGame());
             setCurrentRounds(0);
@@ -72,7 +72,6 @@ public class Game {
             System.out.println("Do zobaczenia!");
             return true;
         }
-
     }
 
     private boolean isRoundLeft() {
@@ -98,22 +97,6 @@ public class Game {
         } else {
             return restartGame();
         }
-    }
-
-    public Computer getComputer() {
-        return computer;
-    }
-
-    public void setComputer(Computer computer) {
-        this.computer = computer;
-    }
-
-    public Human getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Human player) {
-        this.player = player;
     }
 
     public int getNumberOfRounds() {
