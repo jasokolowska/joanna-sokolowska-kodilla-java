@@ -40,7 +40,7 @@ public final class Bigmac {
         }
     }
 
-    public Bigmac(String bun, int burgers, String sauce, List<String> ingredients) {
+    private Bigmac(String bun, int burgers, String sauce, List<String> ingredients) {
         this.bun = bun;
         this.burgers = burgers;
         this.sauce = sauce;
