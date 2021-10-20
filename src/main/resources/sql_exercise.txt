@@ -1,0 +1,77 @@
+CREATE TABLE ISSUESLISTS
+(
+    ID SERIAL PRIMARY KEY,
+    NAME VARCHAR(100)
+);
+
+COMMIT ;
+
+CREATE TABLE ISSUE
+(
+    ID SERIAL PRIMARY KEY,
+    ISSUELIST_ID BIGINT UNSIGNED NOT NULL,
+    SUMMARY VARCHAR(100),
+    DESCRIPTION VARCHAR(1024),
+    USER_ID_ASSIGNTO BIGINT UNSIGNED NOT NULL,
+
+    FOREIGN KEY (ISSUELIST_ID) REFERENCES issueslists(ID),
+    FOREIGN KEY (USER_ID_ASSIGNTO) REFERENCES users(ID)
+);
+
+COMMIT ;
+
+INSERT INTO issueslists(NAME) values ("ToDo");
+INSERT INTO issueslists(NAME) values ("In progress");
+INSERT INTO issueslists(NAME) values ("Done");
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (1, "Pierwsze zadanie", "Opis pierwszego zadania", 1);
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (1, "Drugie zadanie", "Opis drugiego zadania", 2);
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (1, "Trzecie zadanie", "Opis trzeciego zadania", 3);
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (1, "Czwarte zadanie", "Opis czwartego zadania", 4);
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (1, "Piąte zadanie", "Opis piątego zadania", 5);
+
+COMMIT ;
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (2, "Pierwsze zadanie", "Opis pierwszego zadania", 1);
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (2, "Drugie zadanie", "Opis drugiego zadania", 2);
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (2, "Trzecie zadanie", "Opis trzeciego zadania", 3);
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (2, "Czwarte zadanie", "Opis czwartego zadania", 4);
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (2, "Piąte zadanie", "Opis piątego zadania", 5);
+
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (3, "Pierwsze zadanie", "Opis pierwszego zadania", 1);
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (3, "Drugie zadanie", "Opis drugiego zadania", 2);
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (3, "Trzecie zadanie", "Opis trzeciego zadania", 3);
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (3, "Czwarte zadanie", "Opis czwartego zadania", 4);
+
+INSERT INTO ISSUE(issuelist_id, summary, description, user_id_assignto)
+VALUES (3, "Piąte zadanie", "Opis piątego zadania", 5);
+
+COMMIT ;
+
+SELECT * FROM ISSUE;
