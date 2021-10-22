@@ -1,0 +1,15 @@
+INSERT INTO POSTS(USER_ID, BODY)
+VALUES(1, "To jest nowy post");
+
+SELECT * FROM POSTS;
+
+UPDATE posts
+SET BODY = "To delete"
+WHERE ID = 7;
+
+SELECT * FROM POSTS;
+
+DELETE from posts
+WHERE ID = 7;
+
+SELECT * FROM POSTS;
