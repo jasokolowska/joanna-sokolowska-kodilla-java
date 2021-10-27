@@ -1,4 +1,4 @@
-package com.kodilla.sudoku;
+package com.kodilla.sudoku.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,14 @@ import java.util.List;
 public class SudokuElement {
     public static int EMPTY = -1;
 
+    private int col;
+    private int row;
     private int value;
     private List<Integer> possibleValues;
 
-    public SudokuElement(int value) {
+    public SudokuElement(int col, int row, int value) {
+        this.col = col;
+        this.row = row;
         this.value = value;
         this.possibleValues = new ArrayList<>();
 
@@ -28,8 +32,20 @@ public class SudokuElement {
         return value;
     }
 
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     public List<Integer> getPossibleValues() {
         return possibleValues;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public int getRow() {
+        return row;
     }
 
     @Override
