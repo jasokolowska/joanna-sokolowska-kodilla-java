@@ -171,8 +171,8 @@ public class SudokuGame {
         board.addValue(4,9,9);
         board.addValue(6,9,7);
         board.addValue(8,9,6);
-        board.addValue(4,4,3);
-        board.addValue(5,5,2);
-        board.addValue(6,6,9);
+//        board.addValue(4,4,3);
+//        board.addValue(5,5,2);
+//        board.addValue(6,6,9);
     }
 }
