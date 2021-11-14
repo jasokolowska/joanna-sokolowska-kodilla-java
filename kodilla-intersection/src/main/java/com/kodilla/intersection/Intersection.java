@@ -117,7 +117,7 @@ public class Intersection {
         this.entries.add(new IntersectionEntry(2,"S"));
         this.entries.add(new IntersectionEntry(3,"W"));
 
-        entries.get(3).getCars().add(new Car(Direction.LEFT));
+//        this.entries.get(3).getCars().add(new Car());
 
         loadExits();
     }

@@ -16,6 +16,7 @@ public class IntersectionEntry {
 //        for (int i = 0; i < numberOfCars; i++) {
 //            this.cars.add(new Car());
 //        }
+        this.cars.add(new Car());
     }
 
     public void addExit(Direction direction, String name) {

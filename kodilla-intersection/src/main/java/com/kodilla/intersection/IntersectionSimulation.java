@@ -1,5 +1,6 @@
 package com.kodilla.intersection;
 
+import javafx.animation.Animation;
 import javafx.animation.PathTransition;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -25,71 +26,59 @@ public class IntersectionSimulation {
         this.pane = pane;
         generatePoints();
         intersection.loadIntersection();
+        displayCars();
     }
 
     public void run() {
-        displayCars();
-        checkAvailableMoves();
-    }
-
-    private void checkAvailableMoves() {
-        for (IntersectionEntry entry : intersection.getEntries()) {
-            if (entry.getCars().size() > 0) {
-                if (intersection.checkRightOfWay(entry)) {
-                    //goStraight()
-                    //goLeft()
-                    //goRight()
-                    Direction direction = entry.getCars().get(0).getDirection();
-                    switch (direction) {
-                        case RIGHT -> {
-                            driveRight(entry);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private void displayCars() {
+        List<PathTransition> paths = new ArrayList<>();
 
         for (IntersectionEntry entry : intersection.getEntries()) {
 
             for (Car car : entry.getCars()) {
-                Rectangle carView = createCar(Color.GREEN);
+                Rectangle carView = createCar(car);
                 pane.getChildren().add(carView);
 
                 PathTransition pathTransition = new PathTransition();
                 Path path = new Path();
                 Point point = getPoint(entry, "Start");
                 path.getElements().add(new MoveTo(point.getX(), point.getY()));
+                System.out.println("Entry " + entry.getName() + ": car - " + car.getDirection() + ", start point: " + point);
+                System.out.println(">>> Intersection point: ");
                 path.getElements().add(moveToIntersection(entry));
 
-                if (intersection.checkRightOfWay(entry)) {
 
-                    Direction direction = entry.getCars().get(0).getDirection();
-                    switch (direction) {
-                        case LEFT:
-                            path.getElements().addAll(driveLeft(entry));
-                            break;
-                        case RIGHT:
-                            path.getElements().addAll(driveRight(entry));
-                            break;
-                        case STRAIGHT:
-                            path.getElements().addAll(driveStraight(entry));
-                            break;
-                    }
-                }
+//                if (intersection.checkRightOfWay(entry)) {
+//
+//                    Direction direction = entry.getCars().get(0).getDirection();
+//                    switch (direction) {
+//                        case LEFT:
+//                            path.getElements().addAll(driveLeft(entry));
+//                            break;
+//                        case RIGHT:
+//                            path.getElements().addAll(driveRight(entry));
+//                            break;
+//                        case STRAIGHT:
+//                            path.getElements().addAll(driveStraight(entry));
+//                            break;
+//                    }
+//                }
                 pathTransition.setPath(path);
                 pathTransition.setNode(carView);
                 pathTransition.setDuration(TRANSLATE_DURATION);
                 pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-                pathTransition.play();
+                paths.add(pathTransition);
             }
         }
+        paths.forEach(Animation::play);
+        System.out.println("Koniec pętli");
     }
 
-    private List<PathElement> driveStraight(IntersectionEntry entry) {
-        return null;
+    private PathElement driveStraight(IntersectionEntry entry) {
+        Point straight = getPoint(entry, "Straight");
+        return new LineTo(straight.getX(), straight.getY());
     }
 
     private List<PathElement> driveRight(IntersectionEntry entry) {
@@ -128,6 +117,7 @@ public class IntersectionSimulation {
 
     private PathElement moveToIntersection(IntersectionEntry ie) {
         Point point = getPoint(ie, "Intersection");
+        System.out.println(point);
         return new LineTo(point.getX(), point.getY());
     }
 
@@ -136,18 +126,30 @@ public class IntersectionSimulation {
 
         switch (sideOfTheWorld) {
             case "N":
+                System.out.println("N: " + place);
                 return north.get(place);
             case "E":
+                System.out.println("E: " + place);
                 return east.get(place);
             case "S":
+                System.out.println("S: " + place);
                 return south.get(place);
             case "W":
+                System.out.println("W: " + place);
                 return west.get(place);
         }
         return null;
     }
 
-    private Rectangle createCar(Color color) {
+    private Rectangle createCar(Car car) {
+        Color color = Color.RED;
+
+        if (car.getDirection() == Direction.RIGHT) {
+            color = Color.GREEN;
+        } else if (car.getDirection() == Direction.STRAIGHT) {
+            color = Color.YELLOW;
+        }
+
         final Rectangle rectangle = new Rectangle(50, 25, color);
         return rectangle;
     }
@@ -158,15 +160,15 @@ public class IntersectionSimulation {
         north.put("RightTurn", new Point("N", 168, 217));
         north.put("Straight", new Point("N", 215, 512));
         east.put("Start", new Point("E", 512, 215));
-        east.put("Intersection", new Point("E", 335, 215));
+        east.put("Intersection", new Point("E", 360, 215));
         east.put("RightTurn", new Point("E", 295, 180));
         east.put("Straight", new Point("E", 0, 215));
         south.put("Start", new Point("S", 295, 512));
-        south.put("Intersection", new Point("S", 295, 335));
+        south.put("Intersection", new Point("S", 295, 360));
         south.put("RightTurn", new Point("S", 335, 300));
         south.put("Straight", new Point("S", 295, 0));
         west.put("Start", new Point("W", 0, 295));
-        west.put("Intersection", new Point("W", 175, 295));
+        west.put("Intersection", new Point("W", 150, 295));
         west.put("RightTurn", new Point("W", 215, 340));
         west.put("Straight", new Point("W", 512, 300));
 
