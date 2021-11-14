@@ -10,6 +10,10 @@ public class Car {
         this.direction = Direction.fromNumber(randomNbr.nextInt(3));
     }
 
+    public Car(Direction direction) {
+        this.direction = direction;
+    }
+
     public Direction getDirection() {
         return direction;
     }

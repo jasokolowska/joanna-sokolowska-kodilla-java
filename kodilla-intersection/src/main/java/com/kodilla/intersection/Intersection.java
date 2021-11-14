@@ -32,6 +32,38 @@ public class Intersection {
         }
     }
 
+    public boolean checkRightOfWay(IntersectionEntry entry) {
+        Direction direction = entry.getCars().get(0).getDirection();
+        String rightEntryName = entry.getExits().get(Direction.RIGHT);
+        String frontEntryName = entry.getExits().get(Direction.STRAIGHT);
+
+        IntersectionEntry rightEntry = entries.stream()
+                .filter(intersectionEntry -> intersectionEntry.getName().equals(rightEntryName))
+                .toList()
+                .get(0);
+
+        IntersectionEntry frontEntry = entries.stream()
+                .filter(intersectionEntry -> intersectionEntry.getName().equals(frontEntryName))
+                .toList()
+                .get(0);
+
+        if (direction.equals(Direction.RIGHT)) {
+//            entry.getCars().remove(0);
+            System.out.println("Car removed RIGHT");
+            return true;
+        } else if (direction.equals(Direction.STRAIGHT) && rightEntry.getCars().size() == 0) {
+//            entry.getCars().remove(0);
+            System.out.println("Car removed STRAIGHT");
+            return true;
+        } else if (direction.equals(Direction.LEFT) && rightEntry.getCars().size() == 0
+                && frontEntry.getCars().size() == 0) {
+//            entry.getCars().remove(0);
+            System.out.println("Car removed LEFT");
+            return true;
+        }
+        return false;
+    }
+
     public void driveThroughIntersection() {
         int counter = 0;
 
@@ -80,10 +112,12 @@ public class Intersection {
     }
 
     public void loadIntersection() {
-        this.entries.add(new IntersectionEntry("N"));
-        this.entries.add(new IntersectionEntry("E"));
-        this.entries.add(new IntersectionEntry("S"));
-        this.entries.add(new IntersectionEntry("W"));
+        this.entries.add(new IntersectionEntry(0,"N"));
+        this.entries.add(new IntersectionEntry(1,"E"));
+        this.entries.add(new IntersectionEntry(2,"S"));
+        this.entries.add(new IntersectionEntry(3,"W"));
+
+        entries.get(3).getCars().add(new Car(Direction.LEFT));
 
         loadExits();
     }
