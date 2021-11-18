@@ -1,6 +1,7 @@
 package com.kodilla.intersection;
 
 import javafx.animation.Animation;
+import javafx.animation.ParallelTransition;
 import javafx.animation.PathTransition;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class IntersectionSimulation {
 
-    private static final Duration TRANSLATE_DURATION = Duration.seconds(5);
+    private static final Duration TRANSLATE_DURATION = Duration.seconds(2);
     private final Intersection intersection;
     private final Pane pane;
     private HashMap<String, Point> north = new HashMap<>();
@@ -30,6 +31,7 @@ public class IntersectionSimulation {
     }
 
     public void run() {
+//        intersection.run();
     }
 
     private void displayCars() {
@@ -41,7 +43,6 @@ public class IntersectionSimulation {
                 Rectangle carView = createCar(car);
                 pane.getChildren().add(carView);
 
-                PathTransition pathTransition = new PathTransition();
                 Path path = new Path();
                 Point point = getPoint(entry, "Start");
                 path.getElements().add(new MoveTo(point.getX(), point.getY()));
@@ -65,9 +66,7 @@ public class IntersectionSimulation {
 //                            break;
 //                    }
 //                }
-                pathTransition.setPath(path);
-                pathTransition.setNode(carView);
-                pathTransition.setDuration(TRANSLATE_DURATION);
+                PathTransition pathTransition = new PathTransition(TRANSLATE_DURATION, path, carView);
                 pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                 paths.add(pathTransition);
             }
@@ -171,7 +170,5 @@ public class IntersectionSimulation {
         west.put("Intersection", new Point("W", 150, 295));
         west.put("RightTurn", new Point("W", 215, 340));
         west.put("Straight", new Point("W", 512, 300));
-
-
     }
 }
