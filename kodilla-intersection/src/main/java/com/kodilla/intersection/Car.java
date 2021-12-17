@@ -4,12 +4,14 @@ import java.util.Random;
 
 public class Car {
     private Direction direction;
-    private int distance = 500;
-    private int speed = 50;
+    private double distance;
+    private int speed;
 
     public Car() {
         Random randomNbr = new Random();
         this.direction = Direction.fromNumber(randomNbr.nextInt(3));
+        this.distance = 500;
+        this.speed = 50;
     }
 
     public Car(Direction direction) {
@@ -18,6 +20,26 @@ public class Car {
 
     public Direction getDirection() {
         return direction;
+    }
+
+    public void updateDistance(double time) {
+        this.distance += speed * time;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     @Override

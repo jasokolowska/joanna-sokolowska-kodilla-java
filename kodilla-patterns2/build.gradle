@@ -4,8 +4,8 @@ plugins {
     id 'java'
 }
 
-group = 'com.kodilla'
-version = '0.0.1-SNAPSHOT'
+group 'com.kodilla'
+version '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
@@ -13,8 +13,11 @@ repositories {
 }
 
 dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
     implementation 'org.springframework.boot:spring-boot-starter'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

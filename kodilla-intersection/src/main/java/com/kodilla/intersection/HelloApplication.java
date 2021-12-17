@@ -36,7 +36,7 @@ public class HelloApplication extends Application {
 
     private AnchorPane getAnchorPane() {
         AnchorPane pane = new AnchorPane();
-        Image bgImage = new Image("./images/intersection_small.jpg");
+        Image bgImage = new Image("./images/intersection.jpg");
         BackgroundSize backgroundSize = new BackgroundSize(512, 512, true, true, true, false);
         BackgroundImage backgroundImage = new BackgroundImage(bgImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);

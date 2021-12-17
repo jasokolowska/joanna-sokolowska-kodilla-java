@@ -8,9 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class IntersectionSimulation {
 
@@ -21,6 +19,7 @@ public class IntersectionSimulation {
     private HashMap<String, Point> east = new HashMap<>();
     private HashMap<String, Point> south = new HashMap<>();
     private HashMap<String, Point> west = new HashMap<>();
+    private Timer timer = new Timer();
 
     public IntersectionSimulation(Intersection intersection, Pane pane) {
         this.intersection = intersection;
@@ -32,6 +31,14 @@ public class IntersectionSimulation {
 
     public void run() {
 //        intersection.run();
+    }
+
+    private void updateDistanceCars() {
+        for (IntersectionEntry entry : intersection.getEntries()) {
+            for (Car car : entry.getCars()) {
+                car.updateDistance(0.1);
+            }
+        }
     }
 
     private void displayCars() {
@@ -73,6 +80,8 @@ public class IntersectionSimulation {
         }
         paths.forEach(Animation::play);
         System.out.println("Koniec pętli");
+        System.out.println("Node current x: " + pane.getChildren().get(0).getLayoutX() +
+                "\nNode current y: " + pane.getChildren().get(0).getLayoutX());
     }
 
     private PathElement driveStraight(IntersectionEntry entry) {

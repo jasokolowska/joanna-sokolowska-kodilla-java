@@ -49,13 +49,12 @@ public class ForumUser {                                       // [5]
     }                                                           // [29]
 
     public boolean removePost(ForumPost thePost) {
-        return true;
-//        boolean result = false;
-//        if (posts.contains(thePost)) {
-//            posts.remove(thePost);
-//            result = true;
-//        }
-//        return result;
+        boolean result = false;
+        if (posts.contains(thePost)) {
+            posts.remove(thePost);
+            result = true;
+        }
+        return result;
     }                                                           // [32]
 
     public boolean removeComment(ForumComment theComment) {     // [33]

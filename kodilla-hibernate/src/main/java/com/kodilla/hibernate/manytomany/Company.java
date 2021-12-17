@@ -2,6 +2,8 @@ package com.kodilla.hibernate.manytomany;
 
 import com.kodilla.hibernate.task.Task;
 import com.sun.istack.NotNull;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +16,12 @@ import java.util.List;
         resultClass = Company.class
 )
 
+@NamedQuery(
+        name="Company.retrieveCompaniesNameContainingText",
+        query="FROM Company " +
+                "WHERE name LIKE :TEXT"
+)
+@Component
 @Entity
 @Table(name = "COMPANIES")
 public class Company {

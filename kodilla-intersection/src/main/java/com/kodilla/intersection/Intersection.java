@@ -19,17 +19,25 @@ public class Intersection {
         return entries;
     }
 
+
+    public void updateDistance(Car car, double timeUnit) {
+        double currentDistance = car.getDistance();
+        double newDistance = currentDistance + (car.getSpeed() * timeUnit);
+        car.setDistance(newDistance);
+    }
+
     public void run() {
-        while (true) {
-            driveThroughIntersection();
-            placeCarOnIntersection();
-            try{
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println(entries);
-        }
+
+//        while (true) {
+//            driveThroughIntersection();
+//            placeCarOnIntersection();
+//            try{
+//                Thread.sleep(500);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            System.out.println(entries);
+//        }
     }
 
     public boolean checkRightOfWay(IntersectionEntry entry) {
@@ -117,7 +125,7 @@ public class Intersection {
         this.entries.add(new IntersectionEntry(2,"S"));
         this.entries.add(new IntersectionEntry(3,"W"));
 
-        this.entries.get(3).getCars().add(new Car());
+        this.entries.get(0).getCars().add(new Car());
 
         loadExits();
     }
