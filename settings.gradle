@@ -14,4 +14,5 @@ include 'kodilla-hibernate'
 include 'kodilla-intersection'
 include 'patterns2'
 include 'kodilla-patterns2'
+include 'kodilla-testing2'
 
