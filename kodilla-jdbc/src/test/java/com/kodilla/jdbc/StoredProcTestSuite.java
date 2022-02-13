@@ -20,17 +20,19 @@ public class StoredProcTestSuite {
         ResultSet rs = statement.executeQuery(sqlCheckTable);
 
         // When
+        Statement statement2 = dbManager.getConnection().createStatement();
         String sqlProcedureCall = "CALL UpdateVipLevels()";
-        statement.execute(sqlProcedureCall);
+        statement2.execute(sqlProcedureCall);
 
         // Then
-//        int howMany = -1;
-//        if (rs.next()) {
-//            howMany = rs.getInt("HOW_MANY");
-//        }
-//        assertEquals(0, howMany);
-//        rs.close();
-//        statement.close();
+        int howMany = -1;
+        if (rs.next()) {
+            howMany = rs.getInt("HOW_MANY");
+        }
+        assertEquals(0, howMany);
+        rs.close();
+        statement.close();
+        statement2.close();
     }
 
     @Test
