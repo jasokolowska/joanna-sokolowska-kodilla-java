@@ -1,0 +1,13 @@
+# BOOKS
+SELECT * FROM books WHERE TITLE = 'The Stranger';
+# 72ms
+CREATE INDEX BOOKS_IND ON BOOKS (TITLE);
+SELECT * FROM books WHERE TITLE = 'The Stranger';
+# 60ms
+
+# READERS
+SELECT * FROM readers WHERE FIRSTNAME = 'John';
+# 114ms
+CREATE INDEX readers_IND ON readers (FIRSTNAME);
+SELECT * FROM readers WHERE FIRSTNAME = 'John';
+# 62ms
